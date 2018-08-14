@@ -1,0 +1,98 @@
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">{{pageTitle}}</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form class="form-horizontal" novalidate (ngSubmit)="saveAdvertiserPost()" [formGroup]="advertiserPostForm">
+                    <div class="form-body">
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.advertiserId }">
+                            <label class="col-md-3 control-label">Advertiser</label>
+                            <div class="col-md-9">
+                                <select class="form-control" formControlName="advertiserId">
+                                    <option *ngFor="let advertiser of advertisers" [value]="advertiser.id">{{advertiser.name}}</option>
+                                </select>
+                                <span class="help-block" *ngIf="displayMessage.advertiserId">{{displayMessage.advertiserId}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.code }">
+                            <label class="col-md-3 control-label">Code</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="" formControlName="code" />
+                                <span class="help-block" *ngIf="displayMessage.code">{{displayMessage.code}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.name }">
+                            <label class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="" formControlName="name" />
+                                <span class="help-block" *ngIf="displayMessage.name">{{displayMessage.name}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.postTypeId }">
+                            <label class="col-md-3 control-label">Post Type</label>
+                            <div class="col-md-9">
+                                <select class="form-control" formControlName="postTypeId">
+                                    <option value="1">Html</option>
+                                    <option value="2">Image</option>
+                                </select>
+                                <span class="help-block" *ngIf="displayMessage.postTypeId">{{displayMessage.postTypeId}}</span>
+                            </div>
+                        </div>
+                        <div *ngIf="getPostTypeId == 2" class="form-group" [ngClass]="{'has-error': displayMessage.imageUrl }">
+                            <label class="col-md-3 control-label">Image</label>
+                            <div class="col-md-9">
+                                <img [src]="localUrl" height="200" *ngIf="localUrl" />
+                                <input type="file" class="form-control" accept=".jpg, .gif, .png" (change)="fileChange($event)">
+                                <span class="help-block" *ngIf="displayMessage.imageUrl">{{displayMessage.imageUrl}}</span>
+                            </div>
+                        </div>
+                        <div *ngIf="getPostTypeId == 1" class="form-group" [ngClass]="{'has-error': displayMessage.html }">
+                            <label class="col-md-3 control-label">Html</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" placeholder="" formControlName="html"></textarea>
+                                <span class="help-block" *ngIf="displayMessage.html">{{displayMessage.html}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.activeDate }">
+                            <label class="col-md-3 control-label">Active Date</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="" formControlName="activeDate" bsDaterangepicker>
+                                <span class="help-block" *ngIf="displayMessage.activeDate">{{displayMessage.activeDate}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Active</label>
+                            <div class="col-md-9">
+                                <div class="mt-checkbox-inline">
+                                    <label class="mt-checkbox  mt-checkbox-outline">
+                                        <input type="checkbox" class="form-control" placeholder="" formControlName="isActive" />
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green" [disabled]="!advertiserPostForm.valid">Save</button>
+                                <button type="button" class="btn default" [routerLink]="['/master/advertiserPosts']">Cancel</button>
+                                <button type="button" class="btn btn-default" (click)="deleteAdvertiserPost()">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>Dirty: {{ advertiserPostForm.dirty }}
+<br>Touched: {{ advertiserPostForm.touched }}
+<br>Valid: {{ advertiserPostForm.valid }}
+<br>Value: {{ advertiserPostForm.value | json }}

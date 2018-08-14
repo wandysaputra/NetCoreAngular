@@ -1,0 +1,88 @@
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">{{pageTitle}}</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form class="form-horizontal" novalidate (ngSubmit)="saveGroup()" [formGroup]="groupForm">
+                    <div class="form-body">
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.name }">
+                            <label class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input type="email" class="form-control" placeholder="" formControlName="name">
+                                <span class="help-block" *ngIf="displayMessage.name">{{displayMessage.name}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.description }">
+                            <label class="col-md-3 control-label">Description</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="" formControlName="description" />
+                                <span class="help-block" *ngIf="displayMessage.description">{{displayMessage.description}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Active</label>
+                            <div class="col-md-9">
+                                <div class="mt-checkbox-inline">
+                                    <label class="mt-checkbox  mt-checkbox-outline">
+                                        <input type="checkbox" class="form-control" placeholder="" formControlName="isActive" />
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Parent Menu</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <select class="form-control" formControlName="menuId">
+                                        <option *ngFor="let menu of allMenus" [value]="menu.id">{{menu.title}}</option>
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <a class="btn green" (click)="addMenu()"><i class="fa fa-plus"></i>Add</a>
+                                    </span>
+                                </div>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th> Code </th>
+                                            <th> Title </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="!selectedMenus || selectedMenus.length <= 0">
+                                            <td colspan="3">No menu selected!</td>
+                                        </tr>
+                                        <tr *ngFor="let m of selectedMenus">
+                                            <td>{{ m.code }}</td>
+                                            <td>{{ m.title }}</td>
+                                            <td>
+                                                <button type="button" class="btn red delete" (click)="removeMenu(m)">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green" [disabled]="!groupForm.valid">Save</button>
+                                <button type="button" class="btn default" [routerLink]="['/userManagement/groups']">Cancel</button>
+                                <button type="button" class="btn btn-default" (click)="deleteGroup()">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+            </div>
+        </div>
+    </div>
+</div>

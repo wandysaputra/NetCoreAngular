@@ -1,0 +1,70 @@
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">{{pageTitle}}</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3">Advertiser</label>
+                            <label class="col-md-9">{{advertiser.name}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3">Code</label>
+                            <label class="col-md-9">{{advertiserPost.code}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3">Name</label>
+                            <label class="col-md-9">{{advertiserPost.name}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3">Post Type</label>
+                            <label class="col-md-9">{{advertiserPost.postTypeId}}</label>
+                        </div>
+                        <div class="form-group" *ngIf="advertiserPost.postTypeId == 2">
+                            <label class="col-md-3">Image</label>
+                            <label class="col-md-9">
+                                <img src="{{advertiserPost.imageUrl}}" height="200" *ngIf="advertiserPost.imageUrl" />
+                                {{advertiserPost.imageUrl}}
+                            </label>
+                        </div>
+                        <div class="form-group" *ngIf="advertiserPost.postTypeId == 1">
+                            <label class="col-md-3">Html</label>
+                            <label class="col-md-9">{{advertiserPost.html}}
+                            <span ng-bind-html="advertiserPost.html"></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3">Active Period</label>
+                            <label class="col-md-9">{{advertiserPost.activeFrom}} - {{advertiserPost.activeTo}}</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">Active</div>
+                            <div class="col-md-9">{{advertiserPost.isActive}}</div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-default" style="width:80px"
+                                        [routerLink]="['/master/advertiserPosts']"
+                                   queryParamsHandling="preserve">
+                                    <i class="glyphicon glyphicon-chevron-left"></i> Back
+                                </button>
+                                <a class="btn btn-primary" style="width:80px;margin-left:10px"
+                                   [routerLink]="['/master/advertiserPosts', advertiserPost.id, 'edit']">
+                                    Edit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

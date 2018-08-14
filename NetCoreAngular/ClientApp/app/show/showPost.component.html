@@ -1,0 +1,2 @@
+﻿<img src="{{advertiserPost.imageUrl}}" *ngIf="advertiserPost.imageUrl && advertiserPost.postTypeId == 2" />
+<div style="background-color:#ffffff;" [innerHTML]="advertiserPost.html" *ngIf="advertiserPost.postTypeId == 1 && advertiserPost.html"></div>

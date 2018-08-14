@@ -1,0 +1,22 @@
+﻿ <!-- BEGIN PAGE BAR -->
+<ul class="page-breadcrumb">
+    <li>
+        <a routerLink="">Home</a>
+        <i class="fa fa-circle"></i>
+    </li>
+    <li *ngFor="let breadcrumb of breadcrumbs; index as i; first as isFirst; last as isLast">
+        <a [routerLink]="[breadcrumb.url, breadcrumb.params]">
+            {{breadcrumb.label}}
+        </a>        
+        <i *ngIf="!isLast" class="fa fa-circle"></i>
+
+    </li>
+</ul>
+<!--<div class="page-toolbar">
+    <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
+        <i class="icon-calendar"></i>&nbsp;
+        <span class="thin uppercase hidden-xs">January 27, 2018 - February 25, 2018</span>&nbsp;
+        <i class="fa fa-angle-down"></i>
+    </div>
+</div>-->
+<!-- END PAGE BAR -->

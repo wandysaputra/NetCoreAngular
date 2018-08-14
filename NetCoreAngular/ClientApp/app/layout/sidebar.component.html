@@ -1,0 +1,40 @@
+﻿<!-- BEGIN SIDEBAR -->
+<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+<!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+<div class="page-sidebar navbar-collapse collapse">
+    <!-- BEGIN SIDEBAR MENU -->
+    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    
+    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+        <li class="nav-item " *ngFor="let m of menus" routerLinkActive="open" >
+            <a class="nav-link nav-toggle" *ngIf="m.url != ''" [routerLink]="[m.url]"(click)="onMenuClick(m)">
+                <i [ngClass]="m.icon"></i>
+                <span class="title">{{m.title}}</span>
+                <span *ngIf="m.childs.length > 0" class="arrow" routerLinkActive="open1" [ngClass]="m.selected ? 'open' : ''"></span>
+            </a>
+            <a class="nav-link nav-toggle" *ngIf="m.url == ''"(click)="onMenuClick(m)">
+                <i [ngClass]="m.icon"></i>
+                <span class="title">{{m.title}}</span>
+                <span *ngIf="m.childs.length > 0" class="arrow" routerLinkActive="open2" [ngClass]="m.selected ? 'open' : ''"></span>
+            </a>
+            <ul class="sub-menu" *ngIf="m.childs.length > 0" [style.display]="m.selected ? 'block' : 'none'">
+                <li class="nav-item " *ngFor="let c of m.childs">                    
+                    <a class="nav-link " [routerLink]="[c.url]" (click)="onMenuClick(c)">
+                        <i [ngClass]="c.icon"></i>
+                        <span class="title">{{c.title}}</span>
+                        <span routerLinkActive="selected"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>    
+       
+    </ul>
+    <!-- END SIDEBAR MENU -->
+    <!-- END SIDEBAR MENU -->
+</div>
+<!-- END SIDEBAR -->

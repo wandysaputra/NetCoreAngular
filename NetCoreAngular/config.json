@@ -1,0 +1,17 @@
+﻿{
+  "ConnectionStrings": {
+    "BizConnectionString": "Data Source=(local);Initial Catalog=NetCoreAngular;Integrated Security=False;User Id=sa;Password=password;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;MultipleActiveResultSets=True"
+  },
+  
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning"
+    }
+  },
+  "Tokens": {
+    "Key": "@#$%^&*ASKJDGLAKJasds129863",
+    "Issuer": "http://localhost:55875/",
+    "Audience": "WebApp"
+  }
+}

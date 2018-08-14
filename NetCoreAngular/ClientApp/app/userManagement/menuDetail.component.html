@@ -1,0 +1,57 @@
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">{{pageTitle}}</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3">Code</label>
+                            <label class="col-md-9">{{menu.code}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3">Title</label>
+                            <label class="col-md-9">{{menu.title}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3">Url</label>
+                            <label class="col-md-9">{{menu.url}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3">Icon</label>
+                            <label class="col-md-9">{{menu.icon}}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3">Parent Menu</label>
+                            <label class="col-md-9">{{menu.parentMenu.title}}</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">Active</div>
+                            <div class="col-md-9">{{menu.isActive}}</div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-default" style="width:80px"
+                                         [routerLink]="['/userManagement/menus']"
+                                        queryParamsHandling="preserve">
+                                    <i class="glyphicon glyphicon-chevron-left"></i> Back
+                                </button>
+                                <a class="btn btn-primary" style="width:80px;margin-left:10px"
+                                   [routerLink]="['/userManagement/menus', menu.id, 'edit']">
+                                    Edit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

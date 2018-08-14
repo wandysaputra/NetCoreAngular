@@ -1,0 +1,95 @@
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">{{pageTitle}}</span>
+                </div>                
+            </div>
+            <div class="portlet-body form">
+                <form class="form-horizontal" novalidate (ngSubmit)="saveUser()" [formGroup]="userForm">
+                    <div class="form-body">
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.userName }">
+                            <label class="col-md-3 control-label">User Name</label>
+                            <div class="col-md-9">
+                                <input type="email" class="form-control" placeholder="" formControlName="userName">
+                                <span class="help-block" *ngIf="displayMessage.userName">{{displayMessage.userName}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.firstName }">
+                            <label class="col-md-3 control-label">First Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="" formControlName="firstName" />
+                                <span class="help-block" *ngIf="displayMessage.firtName">{{displayMessage.firstName}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group" [ngClass]="{'has-error': displayMessage.lastName }">
+                            <label class="col-md-3 control-label">Last Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" placeholder="" formControlName="lastName">
+                                <span class="help-block" *ngIf="displayMessage.lastName ">{{displayMessage.lastName}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Password</label>
+                            <div class="col-md-9">
+                                <input type="password" class="form-control" placeholder="" formControlName="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Groups</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <select class="form-control" formControlName="groupId">
+                                        <option *ngFor="let group of allGroups" [value]="group.id">{{group.name}}</option>
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <a class="btn green" (click)="addGroup()"><i class="fa fa-plus"></i>Add</a>
+                                    </span>
+                                </div>
+                                
+                                <table class="table table-striped table-bordered table-hover" >
+                                    <thead>
+                                        <tr>
+                                            <th> Name </th>
+                                            <th> Description </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="!selectedGroups || selectedGroups.length <= 0">
+                                            <td colspan="2">No group selected!</td>
+                                        </tr>
+                                        <tr *ngFor="let m of selectedGroups">
+                                            <td>{{ m.name }}</td>
+                                            <td>{{ m.description }}</td>
+                                            <td>
+                                                <button type="button" class="btn red delete" (click)="removeGroup(m)">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green" [disabled]="!userForm.valid">Submit</button>
+                                <button type="button" class="btn default" [routerLink]="['/userManagement/users']">Cancel</button>
+                                <button type="button" class="btn btn-default" (click)="deleteUser()">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>Dirty: {{ userForm.dirty }}
+<br>Touched: {{ userForm.touched }}
+<br>Valid: {{ userForm.valid }}
+<br>Value: {{ userForm.value | json }}

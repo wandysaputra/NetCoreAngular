@@ -1,0 +1,66 @@
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">{{pageTitle}}</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-2">Filter by:</div>
+                    <div class="col-md-4">
+                        <input type="text" [(ngModel)]="listFilter" />
+                    </div>
+                </div>
+                <div class="row" *ngIf="listFilter">
+                    <div class="col-md-6">
+                        <h3>Filtered by: {{listFilter}} </h3>
+                    </div>
+                </div>
+
+                <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+                <button class="btn green"
+                        [routerLink]="['/master/adspots', 0, 'edit']">
+                    <i class="fa fa-plus"></i>
+                    Add
+                </button>
+                <div class="table-scrollable">
+                    <table class="table table-striped table-bordered table-hover" *ngIf="adspots && adspots.length > 0">
+                        <thead>
+                            <tr>
+                                <th> Name </th>
+                                <th> Street </th>
+                                <th> Active </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let adspot of adspots | filter:{ name: listFilter, street: listFilter } : false | paginate: { itemsPerPage: 10, currentPage: page, id:'adspots' }">
+                                <td>
+                                    <a [routerLink]="['/master/adspots', adspot.id]"
+                                       [queryParams]="{filterBy: listFilter, page: page}">
+                                        {{adspot.name}}
+                                    </a>
+                                </td>
+                                <td>{{ adspot.street }}</td>
+                                <td>{{ adspot.isActive }}</td>
+                                <td>
+                                    <a class="btn btn-primary"
+                                       [routerLink]="['/master/adspots', adspot.id, 'edit']">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row ">
+                    <div class=" pull-right">
+                        <pagination-controls (pageChange)="page = $event" autoHide="true" id="adspots"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
